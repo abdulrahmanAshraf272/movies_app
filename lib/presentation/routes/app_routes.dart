@@ -6,10 +6,10 @@ class AppRoutes {
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteNames.home:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
 
       default:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
     }
   }
 }
