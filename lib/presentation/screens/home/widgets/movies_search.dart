@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/business_logic/cubit/movies_cubit.dart';
 
 class MoviesSearch extends StatelessWidget {
   const MoviesSearch({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final moviesCubit = context.read<MoviesCubit>();
     return Container(
         height: 48,
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -24,7 +27,7 @@ class MoviesSearch extends StatelessWidget {
             ),
             Expanded(
                 child: TextField(
-                    controller: TextEditingController(),
+                    controller: moviesCubit.textEditingController,
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                         hintText: 'Search',
@@ -33,7 +36,7 @@ class MoviesSearch extends StatelessWidget {
                         ),
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none),
-                    onChanged: (searchedMovie) {}))
+                    onChanged: (query) => moviesCubit.searchMovies(query)))
           ],
         ));
   }

@@ -8,8 +8,9 @@ final class MoviesInitial extends MoviesState {}
 final class MoviesLoading extends MoviesState {}
 
 final class MoviesLoaded extends MoviesState {
+  final bool isSearching;
   final List<Movie> movies;
-  MoviesLoaded(this.movies);
+  MoviesLoaded(this.movies, {this.isSearching = false});
 }
 
 final class MoviesError extends MoviesState {
