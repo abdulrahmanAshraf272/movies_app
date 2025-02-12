@@ -6,9 +6,9 @@ class MoviesRepository {
   final MoviesWebServices moviesWebServices;
   MoviesRepository(this.moviesWebServices);
 
-  Future<ApiResult<List<Movie>>> getMovies() async {
-    final apiResult =
-        await moviesWebServices.getMovies(rating: 6.5, sortBy: "like_count");
+  Future<ApiResult<List<Movie>>> getMovies(String genre) async {
+    final apiResult = await moviesWebServices.getMovies(
+        rating: 6.5, sortBy: "like_count", genre: genre);
 
     return apiResult.when(
       success: (rawMovies) {

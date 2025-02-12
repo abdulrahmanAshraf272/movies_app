@@ -19,12 +19,15 @@ class MoviesWebServices {
   }
 
   Future<ApiResult<List<dynamic>>> getMovies(
-      {required num rating, required String sortBy}) async {
+      {required num rating,
+      required String sortBy,
+      required String genre}) async {
     try {
       Response response = await dio.get('list_movies.json', queryParameters: {
         "minimum_rating": rating,
         "limit": 50,
-        "sort_by": sortBy
+        "sort_by": sortBy,
+        "genre": genre
       });
       if (response.statusCode == 200 && response.data['data'] != null) {
         return ApiResult.success(response.data['data']['movies']);

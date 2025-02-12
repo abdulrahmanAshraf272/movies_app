@@ -5,6 +5,7 @@ import 'package:movies_app/business_logic/cubit/movies_cubit.dart';
 import 'package:movies_app/constants/app_colors.dart';
 import 'package:movies_app/constants/strings.dart';
 import 'package:movies_app/data/model/movie.dart';
+import 'package:movies_app/presentation/screens/home/widgets/categories.dart';
 import 'package:movies_app/presentation/screens/home/widgets/decoration_light.dart';
 import 'package:movies_app/presentation/screens/home/widgets/movies_list_item.dart';
 import 'package:movies_app/presentation/screens/home/widgets/movies_search.dart';
@@ -83,6 +84,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
         const RandomMovieButton(),
         const TopTextHeader(text: 'What would you like to watch?'),
         const MoviesSearch(),
+        const Categories(),
         const SizedBox(height: 20),
         Expanded(
           child:

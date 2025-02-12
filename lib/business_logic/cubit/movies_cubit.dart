@@ -10,13 +10,14 @@ class MoviesCubit extends Cubit<MoviesState> {
   final MoviesRepository moviesRepository;
   final TextEditingController textEditingController = TextEditingController();
   List<Movie> allMovies = [];
+  String genre = 'all';
 
   MoviesCubit(this.moviesRepository) : super(MoviesInitial());
 
   Future<void> getMovies() async {
     emit(MoviesLoading());
 
-    final result = await moviesRepository.getMovies();
+    final result = await moviesRepository.getMovies(genre);
 
     result.when(
       success: (movies) {
@@ -47,5 +48,10 @@ class MoviesCubit extends Cubit<MoviesState> {
           .toList();
       emit(MoviesLoaded(filteredMovies, isSearching: true));
     }
+  }
+
+  selectCategory(String category) {
+    genre = category;
+    getMovies();
   }
 }
