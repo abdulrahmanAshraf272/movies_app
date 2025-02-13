@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/business_logic/cubit/movies_cubit.dart';
+import 'package:movies_app/data/model/movie.dart';
 import 'package:movies_app/data/repository/movies_repository.dart';
 import 'package:movies_app/data/web_services/movies_web_services.dart';
 import 'package:movies_app/presentation/routes/route_names.dart';
@@ -24,7 +25,11 @@ class AppRoutes {
                   child: const HomeScreen(),
                 ));
       case RouteNames.movieDetails:
-        return MaterialPageRoute(builder: (_) => const MovieDetailsScreen());
+        final argument = settings.arguments as Movie;
+        return MaterialPageRoute(
+            builder: (_) => MovieDetailsScreen(
+                  movie: argument,
+                ));
       case RouteNames.randomMovie:
         return MaterialPageRoute(builder: (_) => const RandomMovieScreen());
 

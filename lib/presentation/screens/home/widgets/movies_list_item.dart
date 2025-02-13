@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/data/model/movie.dart';
+import 'package:movies_app/presentation/routes/route_names.dart';
 
 class MoviesListItem extends StatelessWidget {
   final Movie movie;
@@ -9,7 +10,9 @@ class MoviesListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, RouteNames.movieDetails, arguments: movie);
+      },
       child: LayoutBuilder(builder: (context, constraints) {
         return SizedBox(
           width: double.infinity,
@@ -18,25 +21,28 @@ class MoviesListItem extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(25),
-                child: Container(
-                  height: constraints.maxHeight * 0.75,
-                  width: constraints.maxWidth,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                  //color: AppColors.grey,
-                  child: movie.largeCoverImage != null &&
-                          movie.largeCoverImage!.isNotEmpty
-                      ? FadeInImage.assetNetwork(
-                          width: double.infinity,
-                          height: double.infinity,
-                          placeholder: 'assets/images/loading2.gif',
-                          image: movie.largeCoverImage!,
-                          fit: BoxFit.cover,
-                        )
-                      : Image.asset(
-                          'assets/images/movie_image_demo.png',
-                          fit: BoxFit.cover,
-                        ),
+                child: Hero(
+                  tag: 'movie_image${movie.id}',
+                  child: Container(
+                    height: constraints.maxHeight * 0.75,
+                    width: constraints.maxWidth,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                    //color: AppColors.grey,
+                    child: movie.largeCoverImage != null &&
+                            movie.largeCoverImage!.isNotEmpty
+                        ? FadeInImage.assetNetwork(
+                            width: double.infinity,
+                            height: double.infinity,
+                            placeholder: 'assets/images/loading2.gif',
+                            image: movie.largeCoverImage!,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            'assets/images/movie_image_demo.png',
+                            fit: BoxFit.cover,
+                          ),
+                  ),
                 ),
               ),
               SizedBox(

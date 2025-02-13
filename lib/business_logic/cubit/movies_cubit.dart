@@ -51,6 +51,7 @@ class MoviesCubit extends Cubit<MoviesState> {
   }
 
   selectCategory(String category) {
+    textEditingController.clear();
     genre = category;
     getMovies();
   }
