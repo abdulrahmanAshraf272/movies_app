@@ -10,16 +10,14 @@ class YearAndGenre extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String concatenatedString = genre.join('-');
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      //mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 5.sp,
       children: [
         Text(
           '$year',
           style: TextStyle(
               fontSize: 13.sp, color: Colors.white.withValues(alpha: 0.9)),
-        ),
-        SizedBox(
-          width: 5.w,
         ),
         Container(
           width: 6,
@@ -28,11 +26,9 @@ class YearAndGenre extends StatelessWidget {
               shape: BoxShape.circle,
               color: Colors.white.withValues(alpha: 0.9)),
         ),
-        SizedBox(
-          width: 5.w,
-        ),
         AutoSizeText(
           concatenatedString,
+          textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 13.sp, color: Colors.white.withValues(alpha: 0.9)),
         ),
