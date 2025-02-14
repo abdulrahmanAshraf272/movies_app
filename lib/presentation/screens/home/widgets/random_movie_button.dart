@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/constants/app_colors.dart';
 
 class RandomMovieButton extends StatelessWidget {
-  const RandomMovieButton({super.key});
+  final void Function() onTap;
+  const RandomMovieButton({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topLeft,
       child: GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: Container(
           height: 46,
           width: 46,

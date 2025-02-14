@@ -5,6 +5,7 @@ import 'package:movies_app/business_logic/cubit/movies_cubit.dart';
 import 'package:movies_app/constants/app_colors.dart';
 import 'package:movies_app/constants/strings.dart';
 import 'package:movies_app/data/model/movie.dart';
+import 'package:movies_app/presentation/routes/route_names.dart';
 import 'package:movies_app/presentation/screens/home/widgets/categories.dart';
 import 'package:movies_app/presentation/screens/home/widgets/decoration_light.dart';
 import 'package:movies_app/presentation/screens/home/widgets/movies_list_item.dart';
@@ -68,11 +69,13 @@ class HomeScreenBody extends StatefulWidget {
 }
 
 class _HomeScreenBodyState extends State<HomeScreenBody> {
+  late MoviesCubit moviesCubit;
   @override
   void initState() {
-    super.initState(); // Always call super first
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<MoviesCubit>().getMovies();
+      moviesCubit = context.read<MoviesCubit>();
+      moviesCubit.getMovies();
     });
   }
 
@@ -81,7 +84,12 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
     return SafeArea(
         child: Column(
       children: [
-        const RandomMovieButton(),
+        RandomMovieButton(
+          onTap: () {
+            Navigator.pushNamed(context, RouteNames.randomMovie,
+                arguments: moviesCubit.allMovies);
+          },
+        ),
         const TopTextHeader(text: 'What would you like to watch?'),
         const MoviesSearch(),
         const Categories(),

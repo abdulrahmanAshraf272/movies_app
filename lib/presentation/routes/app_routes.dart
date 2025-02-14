@@ -20,18 +20,38 @@ class AppRoutes {
     switch (settings.name) {
       case RouteNames.home:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => moviesCubit,
-                  child: const HomeScreen(),
-                ));
+          builder: (_) => BlocProvider.value(
+            value: moviesCubit,
+            child: const HomeScreen(),
+          ),
+        );
+
       case RouteNames.movieDetails:
         final argument = settings.arguments as Movie;
         return MaterialPageRoute(
-            builder: (_) => MovieDetailsScreen(
-                  movie: argument,
-                ));
+          builder: (_) => MovieDetailsScreen(
+            movie: argument,
+          ),
+        );
+
       case RouteNames.randomMovie:
-        return MaterialPageRoute(builder: (_) => const RandomMovieScreen());
+        // return PageRouteBuilder(
+        //   settings: settings,
+        //   pageBuilder: (context, animation, secondaryAnimation) =>
+        //       BlocProvider.value(
+        //     value: moviesCubit,
+        //     child: const RandomMovieScreen(),
+        //   ),
+
+        //   transitionDuration:
+        //       const Duration(milliseconds: 1000), // Slow transition
+        // );
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: moviesCubit,
+            child: const RandomMovieScreen(),
+          ),
+        );
 
       default:
         return MaterialPageRoute(builder: (_) => const Scaffold());
