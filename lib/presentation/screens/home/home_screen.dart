@@ -8,6 +8,7 @@ import 'package:movies_app/data/model/movie.dart';
 import 'package:movies_app/presentation/routes/route_names.dart';
 import 'package:movies_app/presentation/screens/home/widgets/categories.dart';
 import 'package:movies_app/presentation/screens/home/widgets/decoration_light.dart';
+import 'package:movies_app/presentation/screens/home/widgets/liquid_glass_bottom_nav_bar.dart';
 import 'package:movies_app/presentation/screens/home/widgets/movies_list_item.dart';
 import 'package:movies_app/presentation/screens/home/widgets/movies_search.dart';
 import 'package:movies_app/presentation/screens/home/widgets/random_movie_button.dart';
@@ -52,7 +53,9 @@ class HomeScreen extends StatelessWidget {
                   color: AppColors.green,
                 ),
               )),
-          const Positioned.fill(child: HomeScreenBody())
+          const Positioned.fill(child: HomeScreenBody()),
+          const Positioned(
+              bottom: 0, right: 0, left: 0, child: LiquidBottomNavBar())
         ],
       ),
     );
@@ -82,36 +85,38 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+        bottom: false,
         child: Column(
-      children: [
-        RandomMovieButton(
-          onTap: () {
-            Navigator.pushNamed(context, RouteNames.randomMovie,
-                arguments: moviesCubit.allMovies);
-          },
-        ),
-        const TopTextHeader(text: 'What would you like to watch?'),
-        const MoviesSearch(),
-        const Categories(),
-        const SizedBox(height: 20),
-        Expanded(
-          child:
-              BlocBuilder<MoviesCubit, MoviesState>(builder: (context, state) {
-            if (state is MoviesLoading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is MoviesError) {
-              return MoviesErrorView(
-                errorMessage: state.errorMessage,
-                onPressedRetry: () => context.read<MoviesCubit>().getMovies(),
-              );
-            } else if (state is MoviesLoaded) {
-              return MoviesLoadedView(movies: state.movies);
-            }
-            return const SizedBox.shrink();
-          }),
-        )
-      ],
-    ));
+          children: [
+            RandomMovieButton(
+              onTap: () {
+                Navigator.pushNamed(context, RouteNames.randomMovie,
+                    arguments: moviesCubit.allMovies);
+              },
+            ),
+            const TopTextHeader(text: 'What would you like to watch?'),
+            const MoviesSearch(),
+            const Categories(),
+            const SizedBox(height: 20),
+            Expanded(
+              child: BlocBuilder<MoviesCubit, MoviesState>(
+                  builder: (context, state) {
+                if (state is MoviesLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is MoviesError) {
+                  return MoviesErrorView(
+                    errorMessage: state.errorMessage,
+                    onPressedRetry: () =>
+                        context.read<MoviesCubit>().getMovies(),
+                  );
+                } else if (state is MoviesLoaded) {
+                  return MoviesLoadedView(movies: state.movies);
+                }
+                return const SizedBox.shrink();
+              }),
+            )
+          ],
+        ));
   }
 }
 
