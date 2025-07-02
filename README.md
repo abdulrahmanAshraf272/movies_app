@@ -1,10 +1,10 @@
 # The Top Movies
 the app present the top 50 movies in different categories.
 
-# Screenshots
+# Video & Screenshots
+https://github.com/user-attachments/assets/a0d3a1f1-0f7a-460f-b169-b9c136b097a2
+
 <div >
-  <img src = "https://github.com/abdulrahmanAshraf272/The_Top_Movies/assets/142792584/8b8a3f8e-fdf5-4b6b-83ab-004930d408cf" width = "40%">
-  <       >    
   <img src = "https://github.com/abdulrahmanAshraf272/The_Top_Movies/assets/142792584/a60c5830-59b1-4a88-9958-a9868ffd2dbd" width = "40%">
 </div>
 <img src = "https://github.com/abdulrahmanAshraf272/The_Top_Movies/assets/142792584/4c114a17-f552-4126-8330-3680f339d66b" width = "40%">
